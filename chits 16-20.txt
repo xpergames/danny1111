@@ -1,0 +1,358 @@
+Made By :
+*Danny (OK)
+
+CHIT 16
+Chit No. 16
+For Sales Dataset, Find output of 10 data analysis statements as:
+1. Draw Scatter plot of sales vs. price each.
+2. Draw Line plot showing the trend of sales over time.
+3. Find Average quantity ordered.
+4. Find Minimum price each.
+5. Find Total number of orders.
+6. Find Average price each per product line.
+7. Find Total sales per country.
+8. Find Total sales per territory.
+9. Find Count of orders by year.
+10. Find Check whether missing values are present.
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+sales_data = pd.read_csv("SalesDataset.csv")
+
+# 1. Draw Scatter plot of sales vs. price each.
+plt.scatter(sales_data['Sales'], sales_data['PriceEach'])
+plt.xlabel("Sales")
+plt.ylabel("Price Each")
+plt.title("Scatter plot of Sales vs. Price Each")
+plt.show()
+
+# 2. Draw Line plot showing the trend of sales over time.
+sales_data['OrderDate'] = pd.to_datetime(sales_data['OrderDate'])
+sales_data_sorted = sales_data.sort_values('OrderDate')
+plt.plot(sales_data_sorted['OrderDate'], sales_data_sorted['Sales'])
+plt.xlabel("Order Date")
+plt.ylabel("Sales")
+plt.title("Trend of Sales Over Time")
+plt.xticks(rotation=45)
+plt.show()
+
+# 3. Find Average quantity ordered.
+average_quantity_ordered = sales_data['QuantityOrdered'].mean()
+print("Average quantity ordered:", average_quantity_ordered)
+
+# 4. Find Minimum price each.
+min_price_each = sales_data['PriceEach'].min()
+print("Minimum price each:", min_price_each)
+
+# 5. Find Total number of orders.
+total_orders = sales_data.shape[0]
+print("Total number of orders:", total_orders)
+
+# 6. Find Average price each per product line.
+average_price_each_per_product_line = sales_data.groupby('ProductLine')['PriceEach'].mean()
+print("Average price each per product line:")
+print(average_price_each_per_product_line)
+
+# 7. Find Total sales per country.
+total_sales_per_country = sales_data.groupby('Country')['Sales'].sum()
+print("Total sales per country:")
+print(total_sales_per_country)
+
+# 8. Find Total sales per territory.
+total_sales_per_territory = sales_data.groupby('Territory')['Sales'].sum()
+print("Total sales per territory:")
+print(total_sales_per_territory)
+
+# 9. Find Count of orders by year.
+sales_data['Year'] = sales_data['OrderDate'].dt.year
+count_orders_by_year = sales_data['Year'].value_counts()
+print("Count of orders by year:")
+print(count_orders_by_year)
+
+# 10. Check whether missing values are present.
+missing_values = sales_data.isnull().values.any()
+if missing_values:
+    print("Missing values are present in the dataset.")
+else:
+    print("No missing values are present in the dataset.")
+
+
+CHIT 17
+Chit No. 17
+For House Price Dataset, Find output of 10 data analysis statements as:
+1. Find Histogram of target price distribution.
+2. Find Scatter plot of target price vs. square footage.
+3. Find Average square footage of properties.
+4. Find Minimum target price.
+5. Find Total number of properties with RERA approval.
+6. Find Total number of 2 BHK properties.
+7. Find Total number of properties in each state.
+8. Find Average longitude of properties.
+9. Find Count of properties in each target price range.
+10. Find Check whether missing values are present.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+house_price_data = pd.read_csv("HousePriceDataset.csv")
+
+# 1. Find Histogram of target price distribution.
+plt.hist(house_price_data['TargetPrice'], bins=20, edgecolor='black')
+plt.xlabel("Target Price")
+plt.ylabel("Frequency")
+plt.title("Histogram of Target Price Distribution")
+plt.show()
+
+# 2. Find Scatter plot of target price vs. square footage.
+plt.scatter(house_price_data['TargetPrice'], house_price_data['SquareFootage'])
+plt.xlabel("Target Price")
+plt.ylabel("Square Footage")
+plt.title("Scatter plot of Target Price vs. Square Footage")
+plt.show()
+
+# 3. Find Average square footage of properties.
+average_square_footage = house_price_data['SquareFootage'].mean()
+print("Average square footage of properties:", average_square_footage)
+
+# 4. Find Minimum target price.
+min_target_price = house_price_data['TargetPrice'].min()
+print("Minimum target price:", min_target_price)
+
+# 5. Find Total number of properties with RERA approval.
+total_rera_approved_properties = (house_price_data['RERAApproved'] == 'Yes').sum()
+print("Total number of properties with RERA approval:", total_rera_approved_properties)
+
+# 6. Find Total number of 2 BHK properties.
+total_2bhk_properties = (house_price_data['Bedrooms'] == 2).sum()
+print("Total number of 2 BHK properties:", total_2bhk_properties)
+
+# 7. Find Total number of properties in each state.
+properties_by_state = house_price_data['State'].value_counts()
+print("Total number of properties in each state:")
+print(properties_by_state)
+
+# 8. Find Average longitude of properties.
+average_longitude = house_price_data['Longitude'].mean()
+print("Average longitude of properties:", average_longitude)
+
+# 9. Find Count of properties in each target price range.
+price_ranges = pd.cut(house_price_data['TargetPrice'], bins=5)
+count_properties_by_price_range = house_price_data.groupby(price_ranges).size()
+print("Count of properties in each target price range:")
+print(count_properties_by_price_range)
+
+# 10. Check whether missing values are present.
+missing_values = house_price_data.isnull().values.any()
+if missing_values:
+    print("Missing values are present in the dataset.")
+else:
+    print("No missing values are present in the dataset.")
+
+CHIT No. 18
+Chit No. 18
+For House Price Dataset, Find output of 10 data analysis statements as:
+1. Draw Bar plot showing the count of properties in each city.
+2. Draw Pie chart showing the distribution of properties by BHK
+configuration.
+3. Find Maximum target price.
+4. Find Average square footage of properties.
+5. Find Total number of 3 BHK properties.
+6. Find Total number of BHK properties vs. BHK_RK properties.
+7. Find Average target price per BHK.
+8. Find Total number of properties in each city.
+9. Find Average latitude of properties.
+10. Find Check whether missing values are present
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+house_price_data = pd.read_csv("HousePriceDataset.csv")
+
+# 1. Draw Bar plot showing the count of properties in each city.
+properties_by_city = house_price_data['City'].value_counts()
+properties_by_city.plot(kind='bar')
+plt.xlabel("City")
+plt.ylabel("Count of Properties")
+plt.title("Count of Properties in Each City")
+plt.show()
+
+# 2. Draw Pie chart showing the distribution of properties by BHK configuration.
+properties_by_bhk = house_price_data['BHK'].value_counts()
+plt.pie(properties_by_bhk, labels=properties_by_bhk.index, autopct='%1.1f%%')
+plt.title("Distribution of Properties by BHK Configuration")
+plt.show()
+
+# 3. Find Maximum target price.
+max_target_price = house_price_data['TargetPrice'].max()
+print("Maximum target price:", max_target_price)
+
+# 4. Find Average square footage of properties.
+average_square_footage = house_price_data['SquareFootage'].mean()
+print("Average square footage of properties:", average_square_footage)
+
+# 5. Find Total number of 3 BHK properties.
+total_3bhk_properties = (house_price_data['BHK'] == 3).sum()
+print("Total number of 3 BHK properties:", total_3bhk_properties)
+
+# 6. Find Total number of BHK properties vs. BHK_RK properties.
+properties_by_bhk_type = house_price_data['BHKType'].value_counts()
+print("Total number of BHK properties vs. BHK_RK properties:")
+print(properties_by_bhk_type)
+
+# 7. Find Average target price per BHK.
+average_target_price_per_bhk = house_price_data.groupby('BHK')['TargetPrice'].mean()
+print("Average target price per BHK:")
+print(average_target_price_per_bhk)
+
+# 8. Find Total number of properties in each city.
+total_properties_by_city = house_price_data.groupby('City').size()
+print("Total number of properties in each city:")
+print(total_properties_by_city)
+
+# 9. Find Average latitude of properties.
+average_latitude = house_price_data['Latitude'].mean()
+print("Average latitude of properties:", average_latitude)
+
+# 10. Check whether missing values are present.
+missing_values = house_price_data.isnull().values.any()
+if missing_values:
+    print("Missing values are present in the dataset.")
+else:
+    print("No missing values are present in the dataset.")
+
+CHIT NO 19
+Chit No. 19
+For State Covid Dataset, Find output of 10 data analysis statements as:
+1. Draw Bar plot showing the total confirmed cases in each state/UT.
+2. Draw Pie chart showing the distribution of cases by status
+(cured/discharged/migrated, deaths, active).
+3. Find Average total confirmed cases across all states/UTs.
+4. Find Minimum total confirmed cases in a state/UT.
+5. Find Number of states/UTs with active cases greater than 100.
+6. Find Average latitude of states/UTs.
+7. Find Total number of cases reported in Karnataka.
+8. Find States/UTs with active cases less than 50.
+9. Find Total number of states/UTs included in the dataset.
+10. Find Percentage of cases cured/discharged/migrated in Gujarat.
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+covid_data = pd.read_csv("StateCovidDataset.csv")
+
+# 1. Draw Bar plot showing the total confirmed cases in each state/UT.
+total_confirmed_cases_by_state = covid_data.groupby('State/UT')['Confirmed'].sum()
+total_confirmed_cases_by_state.plot(kind='bar')
+plt.xlabel("State/UT")
+plt.ylabel("Total Confirmed Cases")
+plt.title("Total Confirmed Cases in Each State/UT")
+plt.xticks(rotation=90)
+plt.show()
+
+# 2. Draw Pie chart showing the distribution of cases by status (cured/discharged/migrated, deaths, active).
+cases_distribution = covid_data[['Cured/Discharged/Migrated', 'Deaths', 'Active']].sum()
+cases_distribution.plot(kind='pie', autopct='%1.1f%%')
+plt.title("Distribution of Cases by Status")
+plt.show()
+
+# 3. Find Average total confirmed cases across all states/UTs.
+average_total_confirmed_cases = covid_data['Confirmed'].mean()
+print("Average total confirmed cases across all states/UTs:", average_total_confirmed_cases)
+
+# 4. Find Minimum total confirmed cases in a state/UT.
+min_total_confirmed_cases = covid_data['Confirmed'].min()
+print("Minimum total confirmed cases in a state/UT:", min_total_confirmed_cases)
+
+# 5. Find Number of states/UTs with active cases greater than 100.
+states_with_active_cases_gt_100 = (covid_data['Active'] > 100).sum()
+print("Number of states/UTs with active cases greater than 100:", states_with_active_cases_gt_100)
+
+# 6. Find Average latitude of states/UTs.
+average_latitude = covid_data['Latitude'].mean()
+print("Average latitude of states/UTs:", average_latitude)
+
+# 7. Find Total number of cases reported in Karnataka.
+total_cases_in_karnataka = covid_data.loc[covid_data['State/UT'] == 'Karnataka', 'Confirmed'].sum()
+print("Total number of cases reported in Karnataka:", total_cases_in_karnataka)
+
+# 8. Find States/UTs with active cases less than 50.
+states_with_active_cases_lt_50 = covid_data.loc[covid_data['Active'] < 50, 'State/UT'].tolist()
+print("States/UTs with active cases less than 50:", states_with_active_cases_lt_50)
+
+# 9. Find Total number of states/UTs included in the dataset.
+total_states_ut = covid_data['State/UT'].nunique()
+print("Total number of states/UTs included in the dataset:", total_states_ut)
+
+# 10. Find Percentage of cases cured/discharged/migrated in Gujarat.
+gujarat_data = covid_data.loc[covid_data['State/UT'] == 'Gujarat']
+percentage_cured = (gujarat_data['Cured/Discharged/Migrated'].sum() / gujarat_data['Confirmed'].sum()) * 100
+print("Percentage of cases cured/discharged/migrated in Gujarat:", percentage_cured)
+
+
+CHIT NO 20
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+covid_data = pd.read_csv("StateCovidDataset.csv")
+
+# 1. Draw Scatter plot showing the relationship between latitude and longitude of states/UTs.
+plt.scatter(covid_data['Latitude'], covid_data['Longitude'])
+plt.xlabel("Latitude")
+plt.ylabel("Longitude")
+plt.title("Scatter plot of Latitude vs. Longitude")
+plt.show()
+
+# 2. Draw Line plot showing the trend of total confirmed cases over time.
+covid_data['Date'] = pd.to_datetime(covid_data['Date'])
+total_cases_over_time = covid_data.groupby('Date')['Confirmed'].sum()
+total_cases_over_time.plot()
+plt.xlabel("Date")
+plt.ylabel("Total Confirmed Cases")
+plt.title("Trend of Total Confirmed Cases Over Time")
+plt.xticks(rotation=45)
+plt.show()
+
+# 3. Find Average total confirmed cases across all states/UTs.
+average_total_confirmed_cases = covid_data['Confirmed'].mean()
+print("Average total confirmed cases across all states/UTs:", average_total_confirmed_cases)
+
+# 4. Find Maximum total confirmed cases in a state/UT.
+max_total_confirmed_cases = covid_data['Confirmed'].max()
+print("Maximum total confirmed cases in a state/UT:", max_total_confirmed_cases)
+
+# 5. Find Number of states/UTs with active cases less than 500.
+states_with_active_cases_lt_500 = (covid_data['Active'] < 500).sum()
+print("Number of states/UTs with active cases less than 500:", states_with_active_cases_lt_500)
+
+# 6. Find Average longitude of states/UTs.
+average_longitude = covid_data['Longitude'].mean()
+print("Average longitude of states/UTs:", average_longitude)
+
+# 7. Find Total number of cases reported in Maharashtra.
+total_cases_in_maharashtra = covid_data.loc[covid_data['State/UT'] == 'Maharashtra', 'Confirmed'].sum()
+print("Total number of cases reported in Maharashtra:", total_cases_in_maharashtra)
+
+# 8. Find States/UTs with active cases greater than 100.
+states_with_active_cases_gt_100 = covid_data.loc[covid_data['Active'] > 100, 'State/UT'].tolist()
+print("States/UTs with active cases greater than 100:", states_with_active_cases_gt_100)
+
+# 9. Find Percentage of cases cured/discharged/migrated in Delhi.
+delhi_data = covid_data.loc[covid_data['State/UT'] == 'Delhi']
+percentage_cured = (delhi_data['Cured/Discharged/Migrated'].sum() / delhi_data['Confirmed'].sum()) * 100
+print("Percentage of cases cured/discharged/migrated in Delhi:", percentage_cured)
+
+# 10. Check whether missing values are present.
+missing_values = covid_data.isnull().values.any()
+if missing_values:
+    print("Missing values are present in the dataset.")
+else:
+    print("No missing values are present in the dataset.")
+

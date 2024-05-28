@@ -1,0 +1,369 @@
+Made By :
+*Danny (OK)
+
+CHIT 11
+Chit No. 11
+For Training and Development Dataset,Find output of 10 data analysis
+statements as:
+1. Find Average training duration.
+2. Find Minimum training duration.
+3. Total number of training programs.
+4. Total number of training programs by training type.
+5. Draw Scatter plot of training duration vs. training cost to visualize
+any correlation between these two variables.
+6. Draw Bar plot showing the count of training programs by training
+program name
+7. Total training cost.
+8. Average training cost per program.
+9. Total training cost by location.
+10. Total training duration by training type.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+training_data = pd.read_csv("TrainingAndDevelopmentDataset.csv")
+
+# 1. Find Average training duration.
+average_training_duration = training_data['TrainingDuration'].mean()
+print("Average training duration:", average_training_duration)
+
+# 2. Find Minimum training duration.
+min_training_duration = training_data['TrainingDuration'].min()
+print("Minimum training duration:", min_training_duration)
+
+# 3. Total number of training programs.
+total_training_programs = training_data.shape[0]
+print("Total number of training programs:", total_training_programs)
+
+# 4. Total number of training programs by training type.
+training_programs_by_type = training_data['TrainingType'].value_counts()
+print("Total number of training programs by training type:")
+print(training_programs_by_type)
+
+# 5. Draw Scatter plot of training duration vs. training cost to visualize any correlation between these two variables.
+plt.scatter(training_data['TrainingDuration'], training_data['TrainingCost'])
+plt.xlabel("Training Duration")
+plt.ylabel("Training Cost")
+plt.title("Scatter plot of Training Duration vs. Training Cost")
+plt.show()
+
+# 6. Draw Bar plot showing the count of training programs by training program name
+training_program_count = training_data['TrainingProgramName'].value_counts()
+training_program_count.plot(kind='bar')
+plt.xlabel("Training Program Name")
+plt.ylabel("Count")
+plt.title("Count of Training Programs by Program Name")
+plt.show()
+
+# 7. Total training cost.
+total_training_cost = training_data['TrainingCost'].sum()
+print("Total training cost:", total_training_cost)
+
+# 8. Average training cost per program.
+average_training_cost_per_program = total_training_cost / total_training_programs
+print("Average training cost per program:", average_training_cost_per_program)
+
+# 9. Total training cost by location.
+training_cost_by_location = training_data.groupby('Location')['TrainingCost'].sum()
+print("Total training cost by location:")
+print(training_cost_by_location)
+
+# 10. Total training duration by training type.
+training_duration_by_type = training_data.groupby('TrainingType')['TrainingDuration'].sum()
+print("Total training duration by training type:")
+print(training_duration_by_type)
+
+CHIT 12
+Chit No. 12
+For Training and Development Dataset, Find output of 10 data analysis
+statements as:
+1. Find Total number of incomplete training programs.
+2. Find Total number of completed training programs.
+3. Find Number of missing values in training outcome.
+4. Draw Scatter plot of training duration vs. training cost to visualize
+any correlation between these two variables.
+5. Draw Bar plot showing the count of training programs by training
+program name.
+6. Find Maximum training duration.
+7. Find Total number of passed training programs.
+8. Find Average training cost by trainer.
+9. Find Total training duration by training outcome.
+10. Find Total number of training programs by training outcome.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+training_data = pd.read_csv("TrainingAndDevelopmentDataset.csv")
+
+# 1. Find Total number of incomplete training programs.
+total_incomplete_training = (training_data['TrainingOutcome'] == 'Incomplete').sum()
+print("Total number of incomplete training programs:", total_incomplete_training)
+
+# 2. Find Total number of completed training programs.
+total_completed_training = (training_data['TrainingOutcome'] == 'Completed').sum()
+print("Total number of completed training programs:", total_completed_training)
+
+# 3. Find Number of missing values in training outcome.
+missing_values_training_outcome = training_data['TrainingOutcome'].isnull().sum()
+print("Number of missing values in training outcome:", missing_values_training_outcome)
+
+# 4. Draw Scatter plot of training duration vs. training cost to visualize any correlation between these two variables.
+plt.scatter(training_data['TrainingDuration'], training_data['TrainingCost'])
+plt.xlabel("Training Duration")
+plt.ylabel("Training Cost")
+plt.title("Scatter plot of Training Duration vs. Training Cost")
+plt.show()
+
+# 5. Draw Bar plot showing the count of training programs by training program name.
+training_program_count = training_data['TrainingProgramName'].value_counts()
+training_program_count.plot(kind='bar')
+plt.xlabel("Training Program Name")
+plt.ylabel("Count")
+plt.title("Count of Training Programs by Program Name")
+plt.show()
+
+# 6. Find Maximum training duration.
+max_training_duration = training_data['TrainingDuration'].max()
+print("Maximum training duration:", max_training_duration)
+
+# 7. Find Total number of passed training programs.
+total_passed_training = (training_data['TrainingOutcome'] == 'Passed').sum()
+print("Total number of passed training programs:", total_passed_training)
+
+# 8. Find Average training cost by trainer.
+average_training_cost_by_trainer = training_data.groupby('Trainer')['TrainingCost'].mean()
+print("Average training cost by trainer:")
+print(average_training_cost_by_trainer)
+
+# 9. Find Total training duration by training outcome.
+total_training_duration_by_outcome = training_data.groupby('TrainingOutcome')['TrainingDuration'].sum()
+print("Total training duration by training outcome:")
+print(total_training_duration_by_outcome)
+
+# 10. Find Total number of training programs by training outcome.
+total_training_programs_by_outcome = training_data['TrainingOutcome'].value_counts()
+print("Total number of training programs by training outcome:")
+print(total_training_programs_by_outcome)
+
+CHIT 13
+Chit No. 13
+For Recruitment Dataset, Find output of 10 data analysis statements as:
+1. Find Average years of experience of applicants.
+2. Find Minimum desired salary among applicants.
+3. Find Total number of applicants.
+4. Find Total number of applicants by gender.
+5. Find Total number of applicants by job title.
+6. Find Average desired salary by gender.
+7. Find Total number of applicants with missing values in phone
+number.
+8. Draw Pie chart showing the distribution of applicants by gender.
+9. Draw Bar plot showing the count of applicants by education level.
+10. Find Total number of applicants with noisy values in desired
+salary.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+recruitment_data = pd.read_csv("RecruitmentDataset.csv")
+
+# 1. Find Average years of experience of applicants.
+average_experience = recruitment_data['YearsExperience'].mean()
+print("Average years of experience of applicants:", average_experience)
+
+# 2. Find Minimum desired salary among applicants.
+min_desired_salary = recruitment_data['DesiredSalary'].min()
+print("Minimum desired salary among applicants:", min_desired_salary)
+
+# 3. Find Total number of applicants.
+total_applicants = recruitment_data.shape[0]
+print("Total number of applicants:", total_applicants)
+
+# 4. Find Total number of applicants by gender.
+applicants_by_gender = recruitment_data['Gender'].value_counts()
+print("Total number of applicants by gender:")
+print(applicants_by_gender)
+
+# 5. Find Total number of applicants by job title.
+applicants_by_job_title = recruitment_data['JobTitle'].value_counts()
+print("Total number of applicants by job title:")
+print(applicants_by_job_title)
+
+# 6. Find Average desired salary by gender.
+average_salary_by_gender = recruitment_data.groupby('Gender')['DesiredSalary'].mean()
+print("Average desired salary by gender:")
+print(average_salary_by_gender)
+
+# 7. Find Total number of applicants with missing values in phone number.
+applicants_missing_phone = recruitment_data['PhoneNumber'].isnull().sum()
+print("Total number of applicants with missing values in phone number:", applicants_missing_phone)
+
+# 8. Draw Pie chart showing the distribution of applicants by gender.
+gender_distribution = recruitment_data['Gender'].value_counts()
+plt.pie(gender_distribution, labels=gender_distribution.index, autopct='%1.1f%%')
+plt.title("Distribution of Applicants by Gender")
+plt.show()
+
+# 9. Draw Bar plot showing the count of applicants by education level.
+education_level_count = recruitment_data['EducationLevel'].value_counts()
+education_level_count.plot(kind='bar')
+plt.xlabel("Education Level")
+plt.ylabel("Count")
+plt.title("Count of Applicants by Education Level")
+plt.show()
+
+# 10. Find Total number of applicants with noisy values in desired salary.
+noisy_desired_salary = recruitment_data[(recruitment_data['DesiredSalary'] < 0)]
+total_noisy_desired_salary = noisy_desired_salary.shape[0]
+print("Total number of applicants with noisy values in desired salary:", total_noisy_desired_salary)
+
+
+CHIT 14
+Chit No. 14
+For Recruitment Dataset, Find output of 10 data analysis statements as:
+1. Draw Scatter plot of years of experience vs. desired salary.2
+2. Draw Density plot of desired salary distribution among applicants.
+3. Find Count of applicants by status.
+4. Find Total number of applicants by status.
+5. Find Total number of applicants by country.
+6. Find Average desired salary by education level.
+7. Find Maximum desired salary among applicants.
+8. Find Total number of applicants by education level.
+9. Find Average desired salary for applicants currently interviewing.
+10. Find Total number of applicants by job title
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+recruitment_data = pd.read_csv("RecruitmentDataset.csv")
+
+# 1. Draw Scatter plot of years of experience vs. desired salary.
+plt.scatter(recruitment_data['YearsExperience'], recruitment_data['DesiredSalary'])
+plt.xlabel("Years of Experience")
+plt.ylabel("Desired Salary")
+plt.title("Scatter plot of Years of Experience vs. Desired Salary")
+plt.show()
+
+# 2. Draw Density plot of desired salary distribution among applicants.
+sns.kdeplot(recruitment_data['DesiredSalary'], shade=True)
+plt.xlabel("Desired Salary")
+plt.ylabel("Density")
+plt.title("Density plot of Desired Salary Distribution")
+plt.show()
+
+# 3. Find Count of applicants by status.
+applicants_by_status = recruitment_data['Status'].value_counts()
+print("Count of applicants by status:")
+print(applicants_by_status)
+
+# 4. Find Total number of applicants by status.
+total_applicants_by_status = recruitment_data.groupby('Status').size()
+print("Total number of applicants by status:")
+print(total_applicants_by_status)
+
+# 5. Find Total number of applicants by country.
+applicants_by_country = recruitment_data['Country'].value_counts()
+print("Total number of applicants by country:")
+print(applicants_by_country)
+
+# 6. Find Average desired salary by education level.
+average_salary_by_education = recruitment_data.groupby('EducationLevel')['DesiredSalary'].mean()
+print("Average desired salary by education level:")
+print(average_salary_by_education)
+
+# 7. Find Maximum desired salary among applicants.
+max_desired_salary = recruitment_data['DesiredSalary'].max()
+print("Maximum desired salary among applicants:", max_desired_salary)
+
+# 8. Find Total number of applicants by education level.
+applicants_by_education = recruitment_data['EducationLevel'].value_counts()
+print("Total number of applicants by education level:")
+print(applicants_by_education)
+
+# 9. Find Average desired salary for applicants currently interviewing.
+average_salary_interviewing = recruitment_data.loc[recruitment_data['Status'] == 'Interviewing', 'DesiredSalary'].mean()
+print("Average desired salary for applicants currently interviewing:", average_salary_interviewing)
+
+# 10. Find Total number of applicants by job title.
+applicants_by_job_title = recruitment_data['JobTitle'].value_counts()
+print("Total number of applicants by job title:")
+print(applicants_by_job_title)
+
+CHIT 15
+Chit No. 15
+For Sales Dataset, Find output of 10 data analysis statements as:
+1. Draw Bar plot showing total sales per product line.
+2. Draw Pie chart showing the distribution of sales by territory.
+3. Find Maximum sales.
+4. Find Total sales per year.
+5. Find Total sales per quarter.
+6. Find Total sales per status.
+7. Find Sum of sales by product line.
+8. Find Average quantity ordered by product line.
+9. Find Count of orders by product line.
+10. Check whether a missing value is present in the dataset.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+sales_data = pd.read_csv("SalesDataset.csv")
+
+# 1. Draw Bar plot showing total sales per product line.
+total_sales_per_product_line = sales_data.groupby('ProductLine')['Sales'].sum()
+total_sales_per_product_line.plot(kind='bar')
+plt.xlabel("Product Line")
+plt.ylabel("Total Sales")
+plt.title("Total Sales per Product Line")
+plt.show()
+
+# 2. Draw Pie chart showing the distribution of sales by territory.
+sales_distribution_by_territory = sales_data.groupby('Territory')['Sales'].sum()
+plt.pie(sales_distribution_by_territory, labels=sales_distribution_by_territory.index, autopct='%1.1f%%')
+plt.title("Distribution of Sales by Territory")
+plt.show()
+
+# 3. Find Maximum sales.
+max_sales = sales_data['Sales'].max()
+print("Maximum sales:", max_sales)
+
+# 4. Find Total sales per year.
+total_sales_per_year = sales_data.groupby('Year')['Sales'].sum()
+print("Total sales per year:")
+print(total_sales_per_year)
+
+# 5. Find Total sales per quarter.
+total_sales_per_quarter = sales_data.groupby('Quarter')['Sales'].sum()
+print("Total sales per quarter:")
+print(total_sales_per_quarter)
+
+# 6. Find Total sales per status.
+total_sales_per_status = sales_data.groupby('Status')['Sales'].sum()
+print("Total sales per status:")
+print(total_sales_per_status)
+
+# 7. Find Sum of sales by product line.
+sum_sales_by_product_line = sales_data.groupby('ProductLine')['Sales'].sum()
+print("Sum of sales by product line:")
+print(sum_sales_by_product_line)
+
+# 8. Find Average quantity ordered by product line.
+average_quantity_ordered_by_product_line = sales_data.groupby('ProductLine')['QuantityOrdered'].mean()
+print("Average quantity ordered by product line:")
+print(average_quantity_ordered_by_product_line)
+
+# 9. Find Count of orders by product line.
+count_orders_by_product_line = sales_data['ProductLine'].value_counts()
+print("Count of orders by product line:")
+print(count_orders_by_product_line)
+
+# 10. Check whether a missing value is present in the dataset.
+missing_values = sales_data.isnull().values.any()
+if missing_values:
+    print("Missing values are present in the dataset.")
+else:
+    print("No missing values are present in the dataset.")

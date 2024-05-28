@@ -1,0 +1,434 @@
+Made By :
+*Danny (OK)
+
+CHIT NO 21
+Chit No. 21
+For Ticket Dataset, Find output of 10 data analysis statements as:
+1. Plot a bar chart showing the count of tickets for each "Ticket
+Priority".
+2. Plot a line plot showing the distribution of "Customer Age".
+3. Filter rows where "Ticket Type" is "Technical issue".
+4. Convert the "Ticket Subject" column to uppercase.
+5. Calculate the average age of customers.
+6. Find the median age of customers.
+7. Extract the last word from the "Customer Email" column.
+8. Identify rows where "Ticket Status" is "Closed".
+9. Select the row with the maximum "Customer Age".
+10. Filter rows where "Customer Age" is greater than 50
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+ticket_data = pd.read_csv("TicketDataset.csv")
+
+# 1. Plot a bar chart showing the count of tickets for each "Ticket Priority".
+ticket_priority_counts = ticket_data['Ticket Priority'].value_counts()
+ticket_priority_counts.plot(kind='bar')
+plt.xlabel("Ticket Priority")
+plt.ylabel("Count")
+plt.title("Count of Tickets for Each Ticket Priority")
+plt.show()
+
+# 2. Plot a line plot showing the distribution of "Customer Age".
+plt.plot(ticket_data['Customer Age'])
+plt.xlabel("Ticket Index")
+plt.ylabel("Customer Age")
+plt.title("Distribution of Customer Age")
+plt.show()
+
+# 3. Filter rows where "Ticket Type" is "Technical issue".
+technical_issue_tickets = ticket_data[ticket_data['Ticket Type'] == 'Technical issue']
+print("Rows where Ticket Type is Technical issue:")
+print(technical_issue_tickets)
+
+# 4. Convert the "Ticket Subject" column to uppercase.
+ticket_data['Ticket Subject'] = ticket_data['Ticket Subject'].str.upper()
+
+# 5. Calculate the average age of customers.
+average_age = ticket_data['Customer Age'].mean()
+print("Average age of customers:", average_age)
+
+# 6. Find the median age of customers.
+median_age = ticket_data['Customer Age'].median()
+print("Median age of customers:", median_age)
+
+# 7. Extract the last word from the "Customer Email" column.
+ticket_data['Last Word'] = ticket_data['Customer Email'].str.split().str[-1]
+
+# 8. Identify rows where "Ticket Status" is "Closed".
+closed_tickets = ticket_data[ticket_data['Ticket Status'] == 'Closed']
+print("Rows where Ticket Status is Closed:")
+print(closed_tickets)
+
+# 9. Select the row with the maximum "Customer Age".
+max_age_row = ticket_data.loc[ticket_data['Customer Age'].idxmax()]
+print("Row with the maximum Customer Age:")
+print(max_age_row)
+
+# 10. Filter rows where "Customer Age" is greater than 50.
+age_gt_50_tickets = ticket_data[ticket_data['Customer Age'] > 50]
+print("Rows where Customer Age is greater than 50:")
+print(age_gt_50_tickets)
+
+
+CHIT NO 22
+Chit No. 22
+For Ticket Dataset, Find output of 10 data analysis statements as:
+1. Plot a pie chart showing the distribution of "Ticket Status".
+2. Plot a scatter plot with "Customer Age" on the x-axis and "Time to
+Resolution" on the y-axis.
+3. Filter rows where "Customer Satisfaction Rating" is less than or
+equal to 3.
+4. Convert the "Ticket Description" column to lowercase.
+5. Find the maximum age of customers.
+6. Find the mean age of customers.
+7. Group the data by the "Customer Gender" column and count the
+occurrences of each gender.
+8. Count the number of tickets with "Ticket Status" as "Pending
+Customer Response".
+9. Select the row with the maximum "Time to Resolution".
+10. Filter rows where "Customer Gender" is "Other" and "Ticket
+Status" is "Open".
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+ticket_data = pd.read_csv("TicketDataset.csv")
+
+# 1. Plot a pie chart showing the distribution of "Ticket Status".
+ticket_status_counts = ticket_data['Ticket Status'].value_counts()
+plt.pie(ticket_status_counts, labels=ticket_status_counts.index, autopct='%1.1f%%')
+plt.title("Distribution of Ticket Status")
+plt.show()
+
+# 2. Plot a scatter plot with "Customer Age" on the x-axis and "Time to Resolution" on the y-axis.
+plt.scatter(ticket_data['Customer Age'], ticket_data['Time to Resolution'])
+plt.xlabel("Customer Age")
+plt.ylabel("Time to Resolution")
+plt.title("Scatter plot of Customer Age vs. Time to Resolution")
+plt.show()
+
+# 3. Filter rows where "Customer Satisfaction Rating" is less than or equal to 3.
+low_satisfaction_tickets = ticket_data[ticket_data['Customer Satisfaction Rating'] <= 3]
+print("Rows where Customer Satisfaction Rating is less than or equal to 3:")
+print(low_satisfaction_tickets)
+
+# 4. Convert the "Ticket Description" column to lowercase.
+ticket_data['Ticket Description'] = ticket_data['Ticket Description'].str.lower()
+
+# 5. Find the maximum age of customers.
+max_age = ticket_data['Customer Age'].max()
+print("Maximum age of customers:", max_age)
+
+# 6. Find the mean age of customers.
+mean_age = ticket_data['Customer Age'].mean()
+print("Mean age of customers:", mean_age)
+
+# 7. Group the data by the "Customer Gender" column and count the occurrences of each gender.
+gender_counts = ticket_data['Customer Gender'].value_counts()
+print("Occurrences of each gender:")
+print(gender_counts)
+
+# 8. Count the number of tickets with "Ticket Status" as "Pending Customer Response".
+pending_response_tickets = (ticket_data['Ticket Status'] == 'Pending Customer Response').sum()
+print("Number of tickets with Ticket Status as Pending Customer Response:", pending_response_tickets)
+
+# 9. Select the row with the maximum "Time to Resolution".
+max_resolution_time_row = ticket_data.loc[ticket_data['Time to Resolution'].idxmax()]
+print("Row with the maximum Time to Resolution:")
+print(max_resolution_time_row)
+
+# 10. Filter rows where "Customer Gender" is "Other" and "Ticket Status" is "Open".
+other_gender_open_tickets = ticket_data[(ticket_data['Customer Gender'] == 'Other') & (ticket_data['Ticket Status'] == 'Open')]
+print("Rows where Customer Gender is Other and Ticket Status is Open:")
+print(other_gender_open_tickets)
+
+CHIT NO 23
+Chit No. 23
+For Ticket Dataset, Find output of 10 data analysis statements as:
+1. Plot a density plot for the "Customer Age" column.
+2. Plot a pie chart showing the distribution of "Ticket Status".
+3. Filter rows where "Customer Age" is greater than 50.
+4. Convert the "Ticket Subject" column to uppercase.
+5. Find the minimum age of customers.
+6. Calculate the average customer age column-wise.
+7. Count the number of tickets with "Ticket Priority" greater than or
+equal to "High".
+8. Extract the first word from the "Product Purchased" column.
+9. Select the row with the maximum "Customer Age".
+10. Filter rows where "Customer Satisfaction Rating" is less than or
+equal to 3.
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+ticket_data = pd.read_csv("TicketDataset.csv")
+
+# 1. Plot a density plot for the "Customer Age" column.
+ticket_data['Customer Age'].plot(kind='density')
+plt.xlabel("Customer Age")
+plt.title("Density Plot for Customer Age")
+plt.show()
+
+# 2. Plot a pie chart showing the distribution of "Ticket Status".
+ticket_status_counts = ticket_data['Ticket Status'].value_counts()
+plt.pie(ticket_status_counts, labels=ticket_status_counts.index, autopct='%1.1f%%')
+plt.title("Distribution of Ticket Status")
+plt.show()
+
+# 3. Filter rows where "Customer Age" is greater than 50.
+age_gt_50_tickets = ticket_data[ticket_data['Customer Age'] > 50]
+print("Rows where Customer Age is greater than 50:")
+print(age_gt_50_tickets)
+
+# 4. Convert the "Ticket Subject" column to uppercase.
+ticket_data['Ticket Subject'] = ticket_data['Ticket Subject'].str.upper()
+
+# 5. Find the minimum age of customers.
+min_age = ticket_data['Customer Age'].min()
+print("Minimum age of customers:", min_age)
+
+# 6. Calculate the average customer age column-wise.
+average_age_columnwise = ticket_data.mean(axis=0)['Customer Age']
+print("Average customer age column-wise:", average_age_columnwise)
+
+# 7. Count the number of tickets with "Ticket Priority" greater than or equal to "High".
+high_priority_tickets = (ticket_data['Ticket Priority'] >= 'High').sum()
+print("Number of tickets with Ticket Priority greater than or equal to High:", high_priority_tickets)
+
+# 8. Extract the first word from the "Product Purchased" column.
+ticket_data['First Word'] = ticket_data['Product Purchased'].str.split().str[0]
+
+# 9. Select the row with the maximum "Customer Age".
+max_age_row = ticket_data.loc[ticket_data['Customer Age'].idxmax()]
+print("Row with the maximum Customer Age:")
+print(max_age_row)
+
+# 10. Filter rows where "Customer Satisfaction Rating" is less than or equal to 3.
+low_satisfaction_tickets = ticket_data[ticket_data['Customer Satisfaction Rating'] <= 3]
+print("Rows where Customer Satisfaction Rating is less than or equal to 3:")
+print(low_satisfaction_tickets)
+
+CHIT NO 24
+Chit No. 24
+For Electronic Price Dataset, Find output of 10 data analysis statements
+as:
+1. Find the maximum price among all products
+2. Find the minimum price among all products.
+3. Calculate the average price of all products.
+4. Calculate the median price of all products.
+5. Group products by merchant and calculate the average price for
+each.
+6. Count the number of products from each merchant.
+7. Find products with equal weights.
+8. Convert all product names to uppercase.
+9. Use iloc to select rows based on their numerical index.
+10. Create a scatter plot showing the relationship between weight
+and price.
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+electronic_price_data = pd.read_csv("ElectronicPriceDataset.csv")
+
+# 1. Find the maximum price among all products.
+max_price = electronic_price_data['Price'].max()
+print("Maximum price among all products:", max_price)
+
+# 2. Find the minimum price among all products.
+min_price = electronic_price_data['Price'].min()
+print("Minimum price among all products:", min_price)
+
+# 3. Calculate the average price of all products.
+average_price = electronic_price_data['Price'].mean()
+print("Average price of all products:", average_price)
+
+# 4. Calculate the median price of all products.
+median_price = electronic_price_data['Price'].median()
+print("Median price of all products:", median_price)
+
+# 5. Group products by merchant and calculate the average price for each.
+average_price_by_merchant = electronic_price_data.groupby('Merchant')['Price'].mean()
+print("Average price for each merchant:")
+print(average_price_by_merchant)
+
+# 6. Count the number of products from each merchant.
+product_count_by_merchant = electronic_price_data['Merchant'].value_counts()
+print("Number of products from each merchant:")
+print(product_count_by_merchant)
+
+# 7. Find products with equal weights.
+equal_weight_products = electronic_price_data[electronic_price_data.duplicated('Weight', keep=False)]
+print("Products with equal weights:")
+print(equal_weight_products)
+
+# 8. Convert all product names to uppercase.
+electronic_price_data['Product'] = electronic_price_data['Product'].str.upper()
+
+# 9. Use iloc to select rows based on their numerical index.
+selected_rows = electronic_price_data.iloc[[0, 3, 5]]
+print("Selected rows based on their numerical index:")
+print(selected_rows)
+
+# 10. Create a scatter plot showing the relationship between weight and price.
+plt.scatter(electronic_price_data['Weight'], electronic_price_data['Price'])
+plt.xlabel("Weight")
+plt.ylabel("Price")
+plt.title("Relationship between Weight and Price")
+plt.show()
+
+
+CHIT NO 25
+Chit No. 25
+For Electronic Price Dataset, Find output of 10 data analysis statements
+as:
+1. Identify the product with the maximum weight.
+2. Identify the product with the minimum weight.
+3. Compute the average weight of all products.
+4. Compute the mean weight of all products.
+5. Group products by category and find the maximum price in each
+category.
+6. Count the number of products in each category.
+7. Find products with prices less than a certain threshold.
+8. Convert all merchant names to lowercase.
+9. Plot a bar plot showing the count of products in each category.
+10. Create a pie chart showing the distribution of products among
+different merchants.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+electronic_price_data = pd.read_csv("ElectronicPriceDataset.csv")
+
+# 1. Identify the product with the maximum weight.
+max_weight_product = electronic_price_data.loc[electronic_price_data['Weight'].idxmax(), 'Product']
+print("Product with the maximum weight:", max_weight_product)
+
+# 2. Identify the product with the minimum weight.
+min_weight_product = electronic_price_data.loc[electronic_price_data['Weight'].idxmin(), 'Product']
+print("Product with the minimum weight:", min_weight_product)
+
+# 3. Compute the average weight of all products.
+average_weight = electronic_price_data['Weight'].mean()
+print("Average weight of all products:", average_weight)
+
+# 4. Compute the mean weight of all products.
+mean_weight = electronic_price_data['Weight'].mean()
+print("Mean weight of all products:", mean_weight)
+
+# 5. Group products by category and find the maximum price in each category.
+max_price_by_category = electronic_price_data.groupby('Category')['Price'].max()
+print("Maximum price in each category:")
+print(max_price_by_category)
+
+# 6. Count the number of products in each category.
+product_count_by_category = electronic_price_data['Category'].value_counts()
+print("Number of products in each category:")
+print(product_count_by_category)
+
+# 7. Find products with prices less than a certain threshold.
+threshold = 100  # Example threshold
+low_price_products = electronic_price_data[electronic_price_data['Price'] < threshold]
+print("Products with prices less than $", threshold, ":")
+print(low_price_products)
+
+# 8. Convert all merchant names to lowercase.
+electronic_price_data['Merchant'] = electronic_price_data['Merchant'].str.lower()
+
+# 9. Plot a bar plot showing the count of products in each category.
+product_count_by_category.plot(kind='bar')
+plt.xlabel("Category")
+plt.ylabel("Count")
+plt.title("Count of Products in Each Category")
+plt.show()
+
+# 10. Create a pie chart showing the distribution of products among different merchants.
+merchant_distribution = electronic_price_data['Merchant'].value_counts()
+plt.pie(merchant_distribution, labels=merchant_distribution.index, autopct='%1.1f%%')
+plt.title("Distribution of Products Among Different Merchants")
+plt.show()
+
+
+CHIT NO 26
+Chit No. 26
+For Electronic Price Dataset, Find output of 10 data analysis statements
+as:
+1. Determine the latest date among all price dates.
+2. Determine the earliest date among all price dates.
+3. Find the average of all prices for each merchant.
+4. Find the median of all prices for each merchant.
+5. Group products by whether they are on sale or not and count the
+number of products in each group.
+6. Count the number of products that are on sale and not on sale.
+7. Identify products with weights greater than a certain value.
+8. Convert all category names to lowercase.
+9. Plot a line plot showing the trend of prices over time.
+10. Use loc to select rows where the price is greater than a certain
+value
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+electronic_price_data = pd.read_csv("ElectronicPriceDataset.csv")
+
+# 1. Determine the latest date among all price dates.
+latest_date = pd.to_datetime(electronic_price_data['Price Date']).max()
+print("Latest date among all price dates:", latest_date)
+
+# 2. Determine the earliest date among all price dates.
+earliest_date = pd.to_datetime(electronic_price_data['Price Date']).min()
+print("Earliest date among all price dates:", earliest_date)
+
+# 3. Find the average of all prices for each merchant.
+average_price_by_merchant = electronic_price_data.groupby('Merchant')['Price'].mean()
+print("Average price for each merchant:")
+print(average_price_by_merchant)
+
+# 4. Find the median of all prices for each merchant.
+median_price_by_merchant = electronic_price_data.groupby('Merchant')['Price'].median()
+print("Median price for each merchant:")
+print(median_price_by_merchant)
+
+# 5. Group products by whether they are on sale or not and count the number of products in each group.
+products_on_sale_count = electronic_price_data['On Sale'].value_counts()
+print("Number of products on sale and not on sale:")
+print(products_on_sale_count)
+
+# 6. Count the number of products that are on sale and not on sale.
+on_sale_count = (electronic_price_data['On Sale'] == True).sum()
+not_on_sale_count = (electronic_price_data['On Sale'] == False).sum()
+print("Number of products on sale:", on_sale_count)
+print("Number of products not on sale:", not_on_sale_count)
+
+# 7. Identify products with weights greater than a certain value.
+threshold_weight = 5  # Example threshold weight
+products_with_greater_weight = electronic_price_data[electronic_price_data['Weight'] > threshold_weight]
+print("Products with weights greater than", threshold_weight, "kg:")
+print(products_with_greater_weight)
+
+# 8. Convert all category names to lowercase.
+electronic_price_data['Category'] = electronic_price_data['Category'].str.lower()
+
+# 9. Plot a line plot showing the trend of prices over time.
+electronic_price_data['Price Date'] = pd.to_datetime(electronic_price_data['Price Date'])
+price_trend_over_time = electronic_price_data.groupby('Price Date')['Price'].mean()
+price_trend_over_time.plot()
+plt.xlabel("Price Date")
+plt.ylabel("Price")
+plt.title("Trend of Prices Over Time")
+plt.show()
+
+# 10. Use loc to select rows where the price is greater than a certain value.
+threshold_price = 500  # Example threshold price
+selected_rows = electronic_price_data.loc[electronic_price_data['Price'] > threshold_price]
+print("Rows where the price is greater than", threshold_price, ":")
+print(selected_rows)
+

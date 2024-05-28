@@ -1,0 +1,357 @@
+Made By :
+*Danny (OK)
+
+CHIT 1
+For IPL Dataset, Find output of 10 data analysis statements as:
+1. Calculate the average number of runs scored per over.
+2. Calculate Average Runs Scored by Each Batter
+3. Find Minimum Runs Scored on a Single Ball
+4. Find Total Runs Scored by Each Team
+5. Identify record of Player ‘P Kumar’
+6. Draw Bar Plot of Total Runs by Each Team
+7. Draw Scatter Plot of Runs vs. Balls
+8. Find total Runs Group by Over
+9. Identify Missing Values
+10. Count of Balls Faced by Each Batter
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+ipl_df = pd.read_csv('ipl_dataset.csv')
+
+# 1. Calculate the average number of runs scored per over.
+avg_runs_per_over = ipl_df.groupby('over')['runs'].sum().mean()
+print("Average Runs Per Over:", avg_runs_per_over)
+
+# 2. Calculate Average Runs Scored by Each Batter
+avg_runs_by_batter = ipl_df.groupby('batter')['runs'].mean()
+print("Average Runs by Each Batter:\n", avg_runs_by_batter)
+
+# 3. Find Minimum Runs Scored on a Single Ball
+min_runs_per_ball = ipl_df['runs'].min()
+print("Minimum Runs on a Single Ball:", min_runs_per_ball)
+
+# 4. Find Total Runs Scored by Each Team
+total_runs_by_team = ipl_df.groupby('team')['runs'].sum()
+print("Total Runs by Each Team:\n", total_runs_by_team)
+
+# 5. Identify record of Player ‘P Kumar’
+p_kumar_record = ipl_df[ipl_df['player'] == 'P Kumar']
+print("Record of Player ‘P Kumar’:\n", p_kumar_record)
+
+# 6. Draw Bar Plot of Total Runs by Each Team
+total_runs_by_team.plot(kind='bar')
+plt.xlabel('Team')
+plt.ylabel('Total Runs')
+plt.title('Total Runs by Each Team')
+plt.show()
+
+# 7. Draw Scatter Plot of Runs vs. Balls
+ipl_df.plot(kind='scatter', x='balls', y='runs')
+plt.xlabel('Balls')
+plt.ylabel('Runs')
+plt.title('Runs vs Balls')
+plt.show()
+
+# 8. Find total Runs Group by Over
+runs_by_over = ipl_df.groupby('over')['runs'].sum()
+print("Total Runs by Over:\n", runs_by_over)
+
+# 9. Identify Missing Values
+missing_values = ipl_df.isnull().sum()
+print("Missing Values:\n", missing_values)
+
+# 10. Count of Balls Faced by Each Batter
+balls_faced_by_batter = ipl_df.groupby('batter')['balls'].count()
+print("Balls Faced by Each Batter:\n", balls_faced_by_batter)
+
+
+CHIT 2
+Chit No. 2
+For IPL Dataset, Find output of 10 data analysis statements as:
+1. Identify the Bowler with the Most Wickets.
+2. Determine the Most Common Dismissal Type.
+3. Find the Player with the Highest Individual Score in a Single
+Inning.
+4. Calculate the Total Number of Dot Balls Bowled by Each Bowler.
+5. Calculate Average Runs Scored by Each Batter.
+6. Find Maximum Runs Scored on a Single Ball.
+7. Draw Scatter Plot of Player Height vs. Weight
+8. Draw Line Graph of Average Overall Rating Over Age
+9. Draw Histogram of Players' Overall Ratings
+10. Draw Count of Players with Potential Rating Above 90
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+ipl_df = pd.read_csv('ipl_dataset.csv')
+
+# 1. Identify the Bowler with the Most Wickets.
+bowler_wickets = ipl_df[ipl_df['dismissal_kind'] != '']['bowler'].value_counts().idxmax()
+print("Bowler with the Most Wickets:", bowler_wickets)
+
+# 2. Determine the Most Common Dismissal Type.
+common_dismissal_type = ipl_df['dismissal_kind'].mode()[0]
+print("Most Common Dismissal Type:", common_dismissal_type)
+
+# 3. Find the Player with the Highest Individual Score in a Single Inning.
+highest_score = ipl_df.groupby(['match_id', 'batter'])['runs'].sum().idxmax()
+print("Player with the Highest Individual Score in a Single Inning:", highest_score)
+
+# 4. Calculate the Total Number of Dot Balls Bowled by Each Bowler.
+dot_balls = ipl_df[ipl_df['runs'] == 0].groupby('bowler')['balls'].count()
+print("Total Number of Dot Balls Bowled by Each Bowler:\n", dot_balls)
+
+# 5. Calculate Average Runs Scored by Each Batter.
+avg_runs_by_batter = ipl_df.groupby('batter')['runs'].mean()
+print("Average Runs Scored by Each Batter:\n", avg_runs_by_batter)
+
+# 6. Find Maximum Runs Scored on a Single Ball.
+max_runs_per_ball = ipl_df['runs'].max()
+print("Maximum Runs Scored on a Single Ball:", max_runs_per_ball)
+
+# 7. Draw Scatter Plot of Player Height vs. Weight
+ipl_df.plot(kind='scatter', x='height', y='weight')
+plt.xlabel('Height')
+plt.ylabel('Weight')
+plt.title('Player Height vs Weight')
+plt.show()
+
+# 8. Draw Line Graph of Average Overall Rating Over Age
+avg_rating_by_age = ipl_df.groupby('age')['rating'].mean()
+avg_rating_by_age.plot(kind='line')
+plt.xlabel('Age')
+plt.ylabel('Average Rating')
+plt.title('Average Rating Over Age')
+plt.show()
+
+# 9. Draw Histogram of Players' Overall Ratings
+ipl_df['rating'].plot(kind='hist', bins=20)
+plt.xlabel('Rating')
+plt.ylabel('Frequency')
+plt.title('Histogram of Players\' Ratings')
+plt.show()
+
+# 10. Draw Count of Players with Potential Rating Above 90
+high_potential_count = (ipl_df['potential_rating'] > 90).sum()
+print("Count of Players with Potential Rating Above 90:", high_potential_count)
+
+CHIT 3
+Chit No. 3
+For FIFA Dataset, Find output of 10 data analysis statements as:
+1. Find Average Overall Rating of Players
+2. Find Minimum and Maximum Height of Players
+3. Calculate Average Age byPlayers Nationality
+4. Find Total Number of Players by Position
+5. Find Count of Players by Each Nationality
+6. Draw Bar Plot of the Number of Players by Each Nationality
+7. Draw Pie Chart of Player Positions Distribution
+8. Draw Scatter Plot of Player Height vs. Weight
+9. Line Graph of Average Overall Rating Over Age
+10. Histogram of Players' Overall Ratings
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+fifa_df = pd.read_csv('fifa_dataset.csv')
+
+# 1. Find Average Overall Rating of Players
+avg_overall_rating = fifa_df['overall_rating'].mean()
+print("Average Overall Rating of Players:", avg_overall_rating)
+
+# 2. Find Minimum and Maximum Height of Players
+min_height = fifa_df['height'].min()
+max_height = fifa_df['height'].max()
+print("Minimum Height of Players:", min_height)
+print("Maximum Height of Players:", max_height)
+
+# 3. Calculate Average Age by Players' Nationality
+avg_age_by_nationality = fifa_df.groupby('nationality')['age'].mean()
+print("Average Age by Players' Nationality:\n", avg_age_by_nationality)
+
+# 4. Find Total Number of Players by Position
+total_players_by_position = fifa_df['position'].value_counts()
+print("Total Number of Players by Position:\n", total_players_by_position)
+
+# 5. Find Count of Players by Each Nationality
+count_players_by_nationality = fifa_df['nationality'].value_counts()
+print("Count of Players by Each Nationality:\n", count_players_by_nationality)
+
+# 6. Draw Bar Plot of the Number of Players by Each Nationality
+count_players_by_nationality.plot(kind='bar')
+plt.xlabel('Nationality')
+plt.ylabel('Number of Players')
+plt.title('Number of Players by Each Nationality')
+plt.show()
+
+# 7. Draw Pie Chart of Player Positions Distribution
+total_players_by_position.plot(kind='pie', autopct='%1.1f%%')
+plt.title('Player Positions Distribution')
+plt.ylabel('')
+plt.show()
+
+# 8. Draw Scatter Plot of Player Height vs. Weight
+fifa_df.plot(kind='scatter', x='height', y='weight')
+plt.xlabel('Height')
+plt.ylabel('Weight')
+plt.title('Player Height vs Weight')
+plt.show()
+
+# 9. Line Graph of Average Overall Rating Over Age
+avg_rating_by_age = fifa_df.groupby('age')['overall_rating'].mean()
+avg_rating_by_age.plot(kind='line')
+plt.xlabel('Age')
+plt.ylabel('Average Overall Rating')
+plt.title('Average Overall Rating Over Age')
+plt.show()
+
+# 10. Histogram of Players' Overall Ratings
+fifa_df['overall_rating'].plot(kind='hist', bins=20)
+plt.xlabel('Overall Rating')
+plt.ylabel('Frequency')
+plt.title('Histogram of Players\' Overall Ratings')
+plt.show()
+
+
+CHIT 4
+Chit No.4
+For FIFA Dataset, Find output of 10 data analysis statements as:
+1. Convert Players Name in Capital Letters only
+2. Draw Density Plot of Players' Weights
+3. Calculate the Average Overall Rating by Players Position
+4. Find Count of Players with Potential Rating Above 90
+5. Find Average Height of Players Grouped by Position
+6. Find Count of Players Born in Each Year (Using 'dob' Column)
+7. Find Players with Age Greater than 40
+8. Draw Bar Plot of the Number of Players by Each Nationality
+9. Average Overall Rating of Players
+10.Minimum and Maximum Height of Players
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+fifa_df = pd.read_csv('fifa_dataset.csv')
+
+# 1. Convert Players Name in Capital Letters only
+fifa_df['name'] = fifa_df['name'].str.upper()
+print("Players' Names in Capital Letters:\n", fifa_df['name'].head())
+
+# 2. Draw Density Plot of Players' Weights
+fifa_df['weight'].plot(kind='density')
+plt.xlabel('Weight')
+plt.title('Density Plot of Players\' Weights')
+plt.show()
+
+# 3. Calculate the Average Overall Rating by Players Position
+avg_rating_by_position = fifa_df.groupby('position')['overall_rating'].mean()
+print("Average Overall Rating by Players' Position:\n", avg_rating_by_position)
+
+# 4. Find Count of Players with Potential Rating Above 90
+high_potential_count = (fifa_df['potential_rating'] > 90).sum()
+print("Count of Players with Potential Rating Above 90:", high_potential_count)
+
+# 5. Find Average Height of Players Grouped by Position
+avg_height_by_position = fifa_df.groupby('position')['height'].mean()
+print("Average Height of Players Grouped by Position:\n", avg_height_by_position)
+
+# 6. Find Count of Players Born in Each Year (Using 'dob' Column)
+# Assuming 'dob' is in the format 'YYYY-MM-DD'
+fifa_df['year_of_birth'] = pd.to_datetime(fifa_df['dob']).dt.year
+count_players_by_year = fifa_df['year_of_birth'].value_counts()
+print("Count of Players Born in Each Year:\n", count_players_by_year)
+
+# 7. Find Players with Age Greater than 40
+# Assuming the dataset includes a column 'age'
+players_above_40 = fifa_df[fifa_df['age'] > 40]
+print("Players with Age Greater than 40:\n", players_above_40)
+
+# 8. Draw Bar Plot of the Number of Players by Each Nationality
+count_players_by_nationality = fifa_df['nationality'].value_counts()
+count_players_by_nationality.plot(kind='bar')
+plt.xlabel('Nationality')
+plt.ylabel('Number of Players')
+plt.title('Number of Players by Each Nationality')
+plt.show()
+
+# 9. Average Overall Rating of Players
+avg_overall_rating = fifa_df['overall_rating'].mean()
+print("Average Overall Rating of Players:", avg_overall_rating)
+
+# 10. Minimum and Maximum Height of Players
+min_height = fifa_df['height'].min()
+max_height = fifa_df['height'].max()
+print("Minimum Height of Players:", min_height)
+print("Maximum Height of Players:", max_height)
+
+CHIT 5
+For NationalVoting Dataset, Find output of 10 data analysis statements
+as:
+1. Find output of 10 data analysis statements as:
+2. Find the candidate with the minimum votes polled in a single
+election.
+3. Determine the maximum votes polled by any candidate.
+4. Calculate the total votes polled for each party.
+5. Count the number of candidates in each party.
+6. Find the total number of votes polled in each year.
+7. Draw a bar plot of total votes polled by each party.
+8. Draw a scatter plot of votes polled versus electors in each year.
+9. Draw a line graph showing the trend of total votes polled over the
+years.
+10. Identify records of the candidate ‘Manoranjan Bhakta'
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+voting_df = pd.read_csv('national_voting_dataset.csv')
+
+# 1. Find the candidate with the minimum votes polled in a single election.
+min_votes_candidate = voting_df.loc[voting_df['votes'].idxmin()]
+print("Candidate with Minimum Votes Polled in a Single Election:\n", min_votes_candidate)
+
+# 2. Determine the maximum votes polled by any candidate.
+max_votes_candidate = voting_df.loc[voting_df['votes'].idxmax()]
+print("Candidate with Maximum Votes Polled:\n", max_votes_candidate)
+
+# 3. Calculate the total votes polled for each party.
+total_votes_by_party = voting_df.groupby('party')['votes'].sum()
+print("Total Votes Polled for Each Party:\n", total_votes_by_party)
+
+# 4. Count the number of candidates in each party.
+num_candidates_by_party = voting_df['party'].value_counts()
+print("Number of Candidates in Each Party:\n", num_candidates_by_party)
+
+# 5. Find the total number of votes polled in each year.
+total_votes_by_year = voting_df.groupby('year')['votes'].sum()
+print("Total Number of Votes Polled in Each Year:\n", total_votes_by_year)
+
+# 6. Draw a bar plot of total votes polled by each party.
+total_votes_by_party.plot(kind='bar')
+plt.xlabel('Party')
+plt.ylabel('Total Votes')
+plt.title('Total Votes Polled by Each Party')
+plt.show()
+
+# 7. Draw a scatter plot of votes polled versus electors in each year.
+voting_df.plot(kind='scatter', x='electors', y='votes')
+plt.xlabel('Electors')
+plt.ylabel('Votes Polled')
+plt.title('Votes Polled vs Electors in Each Year')
+plt.show()
+
+# 8. Draw a line graph showing the trend of total votes polled over the years.
+total_votes_by_year.plot(kind='line')
+plt.xlabel('Year')
+plt.ylabel('Total Votes')
+plt.title('Trend of Total Votes Polled Over the Years')
+plt.show()
+
+# 9. Identify records of the candidate ‘Manoranjan Bhakta’
+manoranjan_bhakta_records = voting_df[voting_df['candidate'] == 'Manoranjan Bhakta']
+print("Records of the Candidate ‘Manoranjan Bhakta’:\n", manoranjan_bhakta_records)
+
+

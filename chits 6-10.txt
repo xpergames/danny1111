@@ -1,0 +1,358 @@
+Made By :
+*Danny (OK)
+
+CHIT 6
+Chit No. 6
+For NationalVoting Dataset, Find output of 10 data analysis statements
+as:
+1.Find the total votes polled by party ‘Indian National Congress’.
+2.Count the number of elections held each year.
+3.Identify missing values in the dataset.
+4.Draw a histogram of the number of votes polled by candidates.
+5.Draw a pie chart of the votes polled by different parties in a given year
+(e.g., 1984).
+6.Find the number of female candidates in each year.
+7.Identify the election year with the highest voter turnout.
+8.Determine the minimum votes polled by any candidate.
+9.Find the candidate with the maximum votes polled in a single election.
+10.Calculate the average number of votes polled per year.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+voting_df = pd.read_csv('national_voting_dataset.csv')
+
+# 1. Find the total votes polled by party ‘Indian National Congress’.
+total_votes_inc = voting_df[voting_df['party'] == 'Indian National Congress']['votes'].sum()
+print("Total Votes Polled by Party 'Indian National Congress':", total_votes_inc)
+
+# 2. Count the number of elections held each year.
+elections_per_year = voting_df['year'].value_counts()
+print("Number of Elections Held Each Year:\n", elections_per_year)
+
+# 3. Identify missing values in the dataset.
+missing_values = voting_df.isnull().sum()
+print("Missing Values in the Dataset:\n", missing_values)
+
+# 4. Draw a histogram of the number of votes polled by candidates.
+voting_df['votes'].plot(kind='hist', bins=20)
+plt.xlabel('Votes')
+plt.ylabel('Frequency')
+plt.title('Histogram of Votes Polled by Candidates')
+plt.show()
+
+# 5. Draw a pie chart of the votes polled by different parties in a given year (e.g., 1984).
+votes_1984 = voting_df[voting_df['year'] == 1984]
+votes_by_party_1984 = votes_1984.groupby('party')['votes'].sum()
+votes_by_party_1984.plot(kind='pie', autopct='%1.1f%%')
+plt.title('Votes Polled by Different Parties in 1984')
+plt.ylabel('')
+plt.show()
+
+# 6. Find the number of female candidates in each year.
+female_candidates_per_year = voting_df[voting_df['gender'] == 'Female']['year'].value_counts()
+print("Number of Female Candidates in Each Year:\n", female_candidates_per_year)
+
+# 7. Identify the election year with the highest voter turnout.
+# Assuming 'turnout' column represents voter turnout
+highest_turnout_year = voting_df.groupby('year')['turnout'].sum().idxmax()
+print("Election Year with the Highest Voter Turnout:", highest_turnout_year)
+
+# 8. Determine the minimum votes polled by any candidate.
+min_votes_polled = voting_df['votes'].min()
+print("Minimum Votes Polled by Any Candidate:", min_votes_polled)
+
+# 9. Find the candidate with the maximum votes polled in a single election.
+max_votes_candidate = voting_df.loc[voting_df['votes'].idxmax()]
+print("Candidate with Maximum Votes Polled in a Single Election:\n", max_votes_candidate)
+
+# 10. Calculate the average number of votes polled per year.
+avg_votes_per_year = voting_df.groupby('year')['votes'].mean()
+print("Average Number of Votes Polled Per Year:\n", avg_votes_per_year)
+
+
+CHIT 7
+Chit No.7
+For StateElection Dataset, Find output of 10 data analysis statements as:
+1. Find Average total votes polled across all constituencies.
+2. Find Minimum total votes polled in a constituency.
+3. Find Total number of constituencies.
+4. Find Total votes polled by each party.
+5. Find Constituency with the highest number of votes polled.
+6. Find Total number of male and female candidates.
+7. Find Average votes polled by male and female candidates.
+8. Find Constituencies with missing values in candidate sex.
+9. Draw Scatter plot of total votes polled vs. electors
+10. Draw Bar Chart the total votes polled by each party
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+election_df = pd.read_csv('state_election_dataset.csv')
+
+# 1. Find Average total votes polled across all constituencies.
+avg_votes_polled = election_df['total_votes'].mean()
+print("Average Total Votes Polled Across All Constituencies:", avg_votes_polled)
+
+# 2. Find Minimum total votes polled in a constituency.
+min_votes_polled = election_df['total_votes'].min()
+print("Minimum Total Votes Polled in a Constituency:", min_votes_polled)
+
+# 3. Find Total number of constituencies.
+total_constituencies = election_df['constituency'].nunique()
+print("Total Number of Constituencies:", total_constituencies)
+
+# 4. Find Total votes polled by each party.
+total_votes_by_party = election_df.groupby('party')['total_votes'].sum()
+print("Total Votes Polled by Each Party:\n", total_votes_by_party)
+
+# 5. Find Constituency with the highest number of votes polled.
+constituency_highest_votes = election_df.loc[election_df['total_votes'].idxmax()]['constituency']
+print("Constituency with the Highest Number of Votes Polled:", constituency_highest_votes)
+
+# 6. Find Total number of male and female candidates.
+total_male_candidates = election_df[election_df['sex'] == 'Male'].shape[0]
+total_female_candidates = election_df[election_df['sex'] == 'Female'].shape[0]
+print("Total Number of Male Candidates:", total_male_candidates)
+print("Total Number of Female Candidates:", total_female_candidates)
+
+# 7. Find Average votes polled by male and female candidates.
+avg_votes_male_candidates = election_df[election_df['sex'] == 'Male']['total_votes'].mean()
+avg_votes_female_candidates = election_df[election_df['sex'] == 'Female']['total_votes'].mean()
+print("Average Votes Polled by Male Candidates:", avg_votes_male_candidates)
+print("Average Votes Polled by Female Candidates:", avg_votes_female_candidates)
+
+# 8. Find Constituencies with missing values in candidate sex.
+constituencies_missing_sex = election_df[election_df['sex'].isnull()]['constituency'].unique()
+print("Constituencies with Missing Values in Candidate Sex:\n", constituencies_missing_sex)
+
+# 9. Draw Scatter plot of total votes polled vs. electors
+election_df.plot(kind='scatter', x='electors', y='total_votes')
+plt.xlabel('Electors')
+plt.ylabel('Total Votes Polled')
+plt.title('Scatter Plot of Total Votes Polled vs. Electors')
+plt.show()
+
+# 10. Draw Bar Chart of the total votes polled by each party
+total_votes_by_party.plot(kind='bar')
+plt.xlabel('Party')
+plt.ylabel('Total Votes Polled')
+plt.title('Total Votes Polled by Each Party')
+plt.show()
+
+
+CHIT 8
+Chit No.8
+For StateElection Dataset, Find output of 10 data analysis statements as:
+1. Find Maximum total votes polled in a constituency.
+2. Find Total number of candidates.
+3. Find Number of constituencies grouped by party.
+4. Find Constituency with the lowest number of votes polled.
+5. Find Total votes polled by male and female candidates.
+6. Find Average votes polled by male and female candidates.
+7. Find Constituencies with missing values in party name.
+8. Draw a pie chart to show the distribution of male and female
+candidates.
+9. Draw Scatter plot of total votes polled vs. electors
+10. Find Total number of constituencies.
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+state_election_data = pd.read_csv("StateElectionDataset.csv")
+
+# 1. Find Maximum total votes polled in a constituency.
+max_votes_polled = state_election_data['TotalVotesPolled'].max()
+print("Maximum total votes polled in a constituency:", max_votes_polled)
+
+# 2. Find Total number of candidates.
+total_candidates = state_election_data['CandidateID'].nunique()
+print("Total number of candidates:", total_candidates)
+
+# 3. Find Number of constituencies grouped by party.
+constituencies_by_party = state_election_data.groupby('PartyName')['ConstituencyID'].nunique()
+print("Number of constituencies grouped by party:")
+print(constituencies_by_party)
+
+# 4. Find Constituency with the lowest number of votes polled.
+lowest_votes_polled_constituency = state_election_data.loc[state_election_data['TotalVotesPolled'].idxmin()]['ConstituencyID']
+print("Constituency with the lowest number of votes polled:", lowest_votes_polled_constituency)
+
+# 5. Find Total votes polled by male and female candidates.
+total_votes_polled_male = state_election_data.loc[state_election_data['Gender'] == 'Male', 'TotalVotesPolled'].sum()
+total_votes_polled_female = state_election_data.loc[state_election_data['Gender'] == 'Female', 'TotalVotesPolled'].sum()
+print("Total votes polled by male candidates:", total_votes_polled_male)
+print("Total votes polled by female candidates:", total_votes_polled_female)
+
+# 6. Find Average votes polled by male and female candidates.
+average_votes_polled_male = state_election_data.loc[state_election_data['Gender'] == 'Male', 'TotalVotesPolled'].mean()
+average_votes_polled_female = state_election_data.loc[state_election_data['Gender'] == 'Female', 'TotalVotesPolled'].mean()
+print("Average votes polled by male candidates:", average_votes_polled_male)
+print("Average votes polled by female candidates:", average_votes_polled_female)
+
+# 7. Find Constituencies with missing values in party name.
+constituencies_missing_party = state_election_data.loc[state_election_data['PartyName'].isnull(), 'ConstituencyID'].unique()
+print("Constituencies with missing values in party name:", constituencies_missing_party)
+
+# 8. Draw a pie chart to show the distribution of male and female candidates.
+gender_distribution = state_election_data['Gender'].value_counts()
+plt.pie(gender_distribution, labels=gender_distribution.index, autopct='%1.1f%%')
+plt.title("Distribution of Male and Female Candidates")
+plt.show()
+
+# 9. Draw Scatter plot of total votes polled vs. electors
+plt.scatter(state_election_data['Electors'], state_election_data['TotalVotesPolled'])
+plt.xlabel("Electors")
+plt.ylabel("Total Votes Polled")
+plt.title("Scatter plot of Total Votes Polled vs. Electors")
+plt.show()
+
+# 10. Find Total number of constituencies.
+total_constituencies = state_election_data['ConstituencyID'].nunique()
+print("Total number of constituencies:", total_constituencies)
+
+
+CHIT 9
+Chit No. 9
+For Employee Dataset,Find output of 10 data analysis statements as:
+1. Find Average age of employees.
+2. Find Minimum age of employees.
+3. Find Total number of employees.
+4. Find Total number of employees by race.
+5. Find Average performance score of employees.
+6. Find Maximum performance score of employees.
+7. Find Total number of employees by job function.
+8. Find Total number of employees by termination description.
+9. Find Total number of employees by employee status.
+10. Draw Scatter plot of age vs. performance score to visualize any
+correlation between these two variables
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+employee_data = pd.read_csv("EmployeeDataset.csv")
+
+# 1. Find Average age of employees.
+average_age = employee_data['Age'].mean()
+print("Average age of employees:", average_age)
+
+# 2. Find Minimum age of employees.
+min_age = employee_data['Age'].min()
+print("Minimum age of employees:", min_age)
+
+# 3. Find Total number of employees.
+total_employees = employee_data.shape[0]
+print("Total number of employees:", total_employees)
+
+# 4. Find Total number of employees by race.
+employees_by_race = employee_data['Race'].value_counts()
+print("Total number of employees by race:")
+print(employees_by_race)
+
+# 5. Find Average performance score of employees.
+average_performance_score = employee_data['PerformanceScore'].mean()
+print("Average performance score of employees:", average_performance_score)
+
+# 6. Find Maximum performance score of employees.
+max_performance_score = employee_data['PerformanceScore'].max()
+print("Maximum performance score of employees:", max_performance_score)
+
+# 7. Find Total number of employees by job function.
+employees_by_job_function = employee_data['JobFunction'].value_counts()
+print("Total number of employees by job function:")
+print(employees_by_job_function)
+
+# 8. Find Total number of employees by termination description.
+employees_by_termination_description = employee_data['TerminationDesc'].value_counts()
+print("Total number of employees by termination description:")
+print(employees_by_termination_description)
+
+# 9. Find Total number of employees by employee status.
+employees_by_employee_status = employee_data['EmployeeStatus'].value_counts()
+print("Total number of employees by employee status:")
+print(employees_by_employee_status)
+
+# 10. Draw Scatter plot of age vs. performance score to visualize any correlation between these two variables.
+plt.scatter(employee_data['Age'], employee_data['PerformanceScore'])
+plt.xlabel("Age")
+plt.ylabel("Performance Score")
+plt.title("Scatter plot of Age vs. Performance Score")
+plt.show()
+
+
+CHIT 10
+Chit No. 10
+For Employee Dataset,Find output of 10 data analysis statements as:
+1. Find Maximum age of employees.
+2. Find Total number of employees by gender.
+3. Find Total number of employees by marital status.
+4. Find Average performance score of employees.
+5. Find Minimum performance score of employees.
+6. Find Total number of employees by location.
+7. Find Total number of employees by termination type.
+8. Find Total number of employees with noisy values in performance
+score.
+9. Draw Bar Chart employee type Vs Count
+10. Find Total number of employees with missing values in exit
+date
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+employee_data = pd.read_csv("EmployeeDataset.csv")
+
+# 1. Find Maximum age of employees.
+max_age = employee_data['Age'].max()
+print("Maximum age of employees:", max_age)
+
+# 2. Find Total number of employees by gender.
+employees_by_gender = employee_data['Gender'].value_counts()
+print("Total number of employees by gender:")
+print(employees_by_gender)
+
+# 3. Find Total number of employees by marital status.
+employees_by_marital_status = employee_data['MaritalStatus'].value_counts()
+print("Total number of employees by marital status:")
+print(employees_by_marital_status)
+
+# 4. Find Average performance score of employees.
+average_performance_score = employee_data['PerformanceScore'].mean()
+print("Average performance score of employees:", average_performance_score)
+
+# 5. Find Minimum performance score of employees.
+min_performance_score = employee_data['PerformanceScore'].min()
+print("Minimum performance score of employees:", min_performance_score)
+
+# 6. Find Total number of employees by location.
+employees_by_location = employee_data['Location'].value_counts()
+print("Total number of employees by location:")
+print(employees_by_location)
+
+# 7. Find Total number of employees by termination type.
+employees_by_termination_type = employee_data['TerminationType'].value_counts()
+print("Total number of employees by termination type:")
+print(employees_by_termination_type)
+
+# 8. Find Total number of employees with noisy values in performance score.
+noisy_performance_scores = employee_data.loc[(employee_data['PerformanceScore'] < 0) | (employee_data['PerformanceScore'] > 5)]
+total_noisy_performance_scores = noisy_performance_scores.shape[0]
+print("Total number of employees with noisy values in performance score:", total_noisy_performance_scores)
+
+# 9. Draw Bar Chart employee type Vs Count
+employee_type_count = employee_data['EmployeeType'].value_counts()
+employee_type_count.plot(kind='bar')
+plt.xlabel("Employee Type")
+plt.ylabel("Count")
+plt.title("Employee Type vs. Count")
+plt.show()
+
+# 10. Find Total number of employees with missing values in exit date.
+employees_missing_exit_date = employee_data['ExitDate'].isnull().sum()
+print("Total number of employees with missing values in exit date:", employees_missing_exit_date)
+
